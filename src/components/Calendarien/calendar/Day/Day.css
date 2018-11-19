@@ -1,0 +1,9 @@
+.calendrien--layout__day {
+    width: calc(100% / 7);
+    text-align: center;
+    font-size: 1em;
+}
+
+.calendrien--layout__day.today {
+    color: red;
+}

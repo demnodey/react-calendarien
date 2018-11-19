@@ -1,0 +1,17 @@
+.btn {
+    display: inline-block;
+    background: #fff;
+    border: 0;
+    outline: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.btn * {
+    vertical-align: middle;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    color: #c5c5c5;
+}
