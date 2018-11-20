@@ -2,10 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Button.css";
 
-const Button = ({children, disabled, className, handleEvent, ...rest}) => {
-
+const Button = ({children, disabled, className, handleEvent, action,...rest}) => {
     return (
-        <button className={`btn ${className}`} disabled={disabled} onClick={() => handleEvent(className)}>
+        <button className={`btn ${className}`} disabled={disabled} onClick={() => {
+            let result = null;
+            if (typeof(action) === 'function') {
+                result = action();
+            }
+            handleEvent(result);
+        }}>
             {children}
         </button>
     )

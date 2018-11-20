@@ -1,6 +1,6 @@
 import { CREATE, WEEK_COUNT} from "./dates";
 
-const defaultLine = 1;
+const defaultLine = 6;
 
 export const zero = (n) => n < 10 ? `0${n}` : n;
 
@@ -8,8 +8,9 @@ export const ymd = (date) => {
     const _date = CREATE(date);
     return {
         y : _date.getFullYear(),
-        m : _date.getMonth(),
-        d : _date.getDate()
+        m : zero(_date.getMonth() + 1),
+        d : _date.getDate(),
+        date
     }
 }
 
@@ -17,13 +18,19 @@ export const line = (start, end) => {
     const wc = WEEK_COUNT.length;
     const diver = end - start;
 
-    const share = Math.floor(diver / wc);
-    const rest = Math.floor(diver % wc); 
-    const total = defaultLine + share + (rest && 1);
+    const share = Math.ceil(diver / wc);
+    const rest = diver % wc; 
+    // defaultLine + share + (rest && 1)
 
     return {
-        share, rest, total 
+        share, 
+        rest, 
+        total : defaultLine
     };
+}
+
+export const joinstr = (strArr) => {
+    return strArr.join(" ");
 }
 
 export const createArray = (size) => Array.apply(null, Array(size))

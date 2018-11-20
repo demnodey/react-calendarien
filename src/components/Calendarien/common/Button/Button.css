@@ -3,7 +3,6 @@
     background: #fff;
     border: 0;
     outline: none;
-    font-size: 24px;
     cursor: pointer;
 }
 
@@ -15,3 +14,7 @@
     cursor: not-allowed;
     color: #c5c5c5;
 }
+
+.btn__prev, .btn__next {
+    font-size: 24px;
+} 

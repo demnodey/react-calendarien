@@ -1,22 +1,31 @@
 import React from "react";
 import "./Day.css";
 
-const Day = ({date, today, local}) => {
-
-    function handleClick () {
-        console.log(date);
-    }
+const Day = ({
+        date, 
+        year, 
+        month, 
+        today, 
+        local, 
+        selected, 
+        handleSelect, 
+        setPropsValue
+    }) => {
 
     const _today = today ? 'today' : "";
-
+    const _selected = selected ? 'selected' : "";
+    const options = [_today, _selected];
 
     return (
         <div 
-            className={`calendrien--layout__day ${_today}`} 
-            data-local={local} 
-            onClick={handleClick}
+            className={`calenderien--day calenderien--day__${local} ${options.join(" ")}`}
+            data-local={local}
+            onClick={() => {
+                handleSelect(date)
+                setPropsValue(`${year} ${month} ${date}`);
+            }}
         >
-            { date }
+            <div className={`calendarien--day__date`}>{ date }</div>
         </div>
     )
 }

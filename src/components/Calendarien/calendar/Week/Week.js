@@ -3,14 +3,22 @@ import "./Week.css";
 
 import Day from "../Day";
 
-const Week = ({data, children, ...rest}) => {
+const Week = ({data, children, handleSelect, setPropsValue, ...rest}) => {
     
     const days = data.map((d, i) => {
-        return <Day key={i} {...d} />
+        return (
+            <Day 
+                key={i} 
+                handleSelect={handleSelect} 
+                setPropsValue={setPropsValue}
+                {...d} 
+            />
+        )
+        
     })
 
     return (
-        <div className="calendarien--layout__week">   
+        <div className="calendarien--week">   
             {days}
         </div>
     )

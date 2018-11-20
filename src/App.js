@@ -5,22 +5,32 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 class App extends Component {
 
+    handleSelect = (value) => {
+        console.log(value)
+    }
+
     render() {
+
+        const { handleSelect } = this;
 
         return (
             <div 
                 className="App" 
                 style={
                     {
-                        width: 350,
-                        height: 600
+                        width: 300,
+                        height: 400
                     }
                 }
             >
-                <Calendarien 
+                <Calendarien
+                    setDate="2019 6 18"
                     customizeIcon={
-                        [<MdKeyboardArrowLeft />, <MdKeyboardArrowRight />]    
+                        [<MdKeyboardArrowLeft />, 
+                        <MdKeyboardArrowRight />]    
                     }
+                    getValue={handleSelect}
+                    setFormat={"sm dd, yyyy"}
                 />
             </div>
         );

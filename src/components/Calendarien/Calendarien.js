@@ -7,8 +7,7 @@ import Header from "./common/Header";
 
 import Viewer from "./calendar/Viewer";
 
-import { format } from "./utils/format";
-// import { SHORTMONTH } from "./utils/dates";
+import { MILLISECONDS } from "./utils/dates";
 
 class Calendarien extends Component {
 
@@ -16,61 +15,71 @@ class Calendarien extends Component {
         layout : {
             width: "100%",
             height: "inheriet",
-            background: 'white',
             color: '#262626'
         },
-        now : () => new Date(),
-        mode : 'default',
         allowRange : [],
         disabled : false,
-        customizeIcon: []
+        customizeIcon: [],
+        setDate: "",
+        setFormat: "",
+        getValue: () => {},
     }
 
-    componentDidMount() {
-        const { now } = this.props;
+    state = {
+        value : MILLISECONDS(),
+        selectedValue : 0,
+        mode : 'default'
     }
 
-    handleSelect = () => {
-
+    componentDidUpdate(prevProps, prevState) {
     }
 
-    handleNext = (action) => {
-        console.log(action)
+    handleSelect = (selectedValue) => {
+        this.setState({ selectedValue })
     }
 
-    handlePrev = (action) => {
-        console.log(action)
+    handleMonthChange = (value) => {
+        this.setState({ 
+            value
+        })
     }
 
+    setPropsValue = (selectValue) => {
+        const { getValue } = this.props;
+        getValue(selectValue);
+    }
 
     render () {
 
         const {
             handleSelect,
-            handleNext,
-            handlePrev
+            handleMonthChange,
+            setPropsValue
         } = this;
 
         const { 
-            layout, 
-            now,
+            layout,
             customizeIcon
-         } = this.props;
+        } = this.props;
 
-        const nowTime = now();
+        const { 
+            value,
+            selectedValue
+        } = this.state;
 
         return (
             <Layout className="calendarien" style={layout}>
                 <Header 
-                    title={format('sm dd, yyyy', nowTime)} 
+                    value={value} 
                     customizeIcon={customizeIcon}
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
+                    handleMonthChange={handleMonthChange}
                 />
                 <Viewer
-                    date={nowTime}
+                    value={value}
                     height={layout.height}
                     handleSelect={handleSelect}
+                    selectedValue={selectedValue}
+                    setPropsValue={setPropsValue}
                 />
                 {/* <Footer/> */}
             </Layout>
@@ -82,7 +91,7 @@ Calendarien.propTypes = {
     layout: PropTypes.shape({ 
         background: PropTypes.string
     }),
-    now: PropTypes.func,
+    now: PropTypes.object,
     mode: PropTypes.string,
     allowRange: PropTypes.arrayOf(PropTypes.string),
     disabled: PropTypes.bool,
@@ -92,6 +101,9 @@ Calendarien.propTypes = {
             PropTypes.string,
         ])
     ),
+    setDate: PropTypes.string,
+    setFormat: PropTypes.string,
+    getValue: PropTypes.func
 }
 
 export default Calendarien;

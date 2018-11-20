@@ -4,17 +4,30 @@ import "./Header.css";
 
 import Button from "../Button";
 
-const Header = ({ title, customizeIcon, handleNext, handlePrev }) => {
+import { format } from "../../utils/format";
+import { MOVE_MONTH } from "../../utils/dates";
+
+const Header = ({ value, customizeIcon, handleMonthChange }) => {
+
+    const _title = format("bm, yyyy", value);
 
     return (
         <div className="calendarien--header">
-            <Button className="btn__prev" handleEvent={handlePrev}>
+            <Button 
+                className="btn__prev" 
+                handleEvent={handleMonthChange} 
+                action={() => MOVE_MONTH(value, -1)}
+            >
                 {customizeIcon[0]}
             </Button>
             <div className="calendarien--header__title">
-                {title}
+                {_title}
             </div>
-            <Button className="btn__next" handleEvent={handleNext}>
+            <Button 
+                className="btn__next" 
+                handleEvent={handleMonthChange}
+                action={() => MOVE_MONTH(value, 1)}
+            >
                 {customizeIcon[1]}
             </Button>
         </div>
@@ -22,7 +35,7 @@ const Header = ({ title, customizeIcon, handleNext, handlePrev }) => {
 }
 
 Header.propTypes = {
-    title: PropTypes.string
+    title: PropTypes.number
 }
 
 export default Header;
