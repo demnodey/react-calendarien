@@ -13,23 +13,27 @@ const Header = ({ value, customizeIcon, handleMonthChange }) => {
 
     return (
         <div className="calendarien--header">
+
             <Button 
-                className="btn__prev" 
+                className="btn__prev"
                 handleEvent={handleMonthChange} 
                 action={() => MOVE_MONTH(value, -1)}
             >
-                {customizeIcon[0]}
+                { !customizeIcon[0] ? ("<") : (customizeIcon[0]) }
             </Button>
+
             <div className="calendarien--header__title">
                 {_title}
             </div>
+
             <Button 
                 className="btn__next" 
                 handleEvent={handleMonthChange}
                 action={() => MOVE_MONTH(value, 1)}
             >
-                {customizeIcon[1]}
+                { !customizeIcon[1] ? (">") : (customizeIcon[1]) }
             </Button>
+
         </div>
     )
 }

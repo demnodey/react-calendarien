@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import Calendarien from "./components/Calendarien";
 
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 class App extends Component {
 
+    state = {
+        date : ''
+    }
+
     handleSelect = (value) => {
-        console.log(value)
+        this.setState({
+            date: value
+        })
     }
 
     render() {
 
         const { handleSelect } = this;
+        const { date } = this.state; 
 
         return (
             <div 
@@ -24,14 +31,11 @@ class App extends Component {
                 }
             >
                 <Calendarien
-                    setDate="2019 6 18"
-                    customizeIcon={
-                        [<MdKeyboardArrowLeft />, 
-                        <MdKeyboardArrowRight />]    
-                    }
                     getValue={handleSelect}
-                    setFormat={"sm dd, yyyy"}
+                    setFormat={"bm dd, yyyy"}
                 />
+
+                {date}
             </div>
         );
     }

@@ -3,35 +3,44 @@ import PropTypes from "prop-types";
 
 import Layout from "./common/Layout";
 import Header from "./common/Header";
-// import Footer from "./common/Footer";
+import Footer from "./common/Footer";
 
 import Viewer from "./calendar/Viewer";
 
-import { MILLISECONDS } from "./utils/dates";
+import { MILLISECONDS, CREATE } from "./utils/dates";
+import { format } from "./utils/format";
 
 class Calendarien extends Component {
 
     static defaultProps = {
-        layout : {
-            width: "100%",
-            height: "inheriet",
+        style : {
+            width: '100%',
+            height: 'inheriet',
             color: '#262626'
         },
-        allowRange : [],
+        setFormat: '',
+        setDate: '',
+        mode : 'default',
+        visibleMyDate: false,
+        visibleToday: false,
         disabled : false,
         customizeIcon: [],
-        setDate: "",
-        setFormat: "",
+        allowRange : [],
         getValue: () => {},
     }
 
     state = {
         value : MILLISECONDS(),
-        selectedValue : 0,
-        mode : 'default'
+        selectedValue : 0
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    initialize = () => {
+        const { setDate } = this.props;
+        if (setDate) {
+            this.setState({
+                value: CREATE(setDate).getTime()
+            })
+        }
     }
 
     handleSelect = (selectedValue) => {
@@ -44,9 +53,27 @@ class Calendarien extends Component {
         })
     }
 
+    onMyDate = () => {
+        this.initialize();
+    }
+
+    onToday = (value) => {
+        this.setState({ value })
+    }
+
     setPropsValue = (selectValue) => {
-        const { getValue } = this.props;
-        getValue(selectValue);
+        const { getValue, setFormat } = this.props;
+        const result = !setFormat ? selectValue : format(setFormat, selectValue);
+
+        getValue(result);
+    }
+
+    componentDidMount () {
+        this.initialize();
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+
     }
 
     render () {
@@ -54,12 +81,17 @@ class Calendarien extends Component {
         const {
             handleSelect,
             handleMonthChange,
-            setPropsValue
+            setPropsValue,
+            onMyDate,
+            onToday
         } = this;
 
         const { 
-            layout,
-            customizeIcon
+            style,
+            customizeIcon,
+            visibleMyDate,
+            visibleToday,
+            setDate
         } = this.props;
 
         const { 
@@ -68,7 +100,7 @@ class Calendarien extends Component {
         } = this.state;
 
         return (
-            <Layout className="calendarien" style={layout}>
+            <Layout className="calendarien" style={style}>
                 <Header 
                     value={value} 
                     customizeIcon={customizeIcon}
@@ -76,24 +108,27 @@ class Calendarien extends Component {
                 />
                 <Viewer
                     value={value}
-                    height={layout.height}
                     handleSelect={handleSelect}
                     selectedValue={selectedValue}
                     setPropsValue={setPropsValue}
                 />
-                {/* <Footer/> */}
+                <Footer
+                    visibleMyDate={visibleMyDate}
+                    visibleToday={visibleToday}
+                    setDate={setDate}
+                    onMyDate={onMyDate}
+                    onToday={onToday}
+                />
             </Layout>
         )
     }
 }
 
 Calendarien.propTypes = {
-    layout: PropTypes.shape({ 
+    style: PropTypes.shape({ 
         background: PropTypes.string
     }),
-    now: PropTypes.object,
     mode: PropTypes.string,
-    allowRange: PropTypes.arrayOf(PropTypes.string),
     disabled: PropTypes.bool,
     customizeIcon: PropTypes.arrayOf(
         PropTypes.oneOfType([
@@ -101,9 +136,11 @@ Calendarien.propTypes = {
             PropTypes.string,
         ])
     ),
+    allowRange: PropTypes.arrayOf(PropTypes.string),
     setDate: PropTypes.string,
     setFormat: PropTypes.string,
-    getValue: PropTypes.func
+    visibleToday: PropTypes.bool,
+    getValue: PropTypes.func,
 }
 
 export default Calendarien;

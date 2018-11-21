@@ -14,7 +14,6 @@ const Week = ({data, children, handleSelect, setPropsValue, ...rest}) => {
                 {...d} 
             />
         )
-        
     })
 
     return (

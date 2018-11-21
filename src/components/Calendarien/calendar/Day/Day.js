@@ -22,7 +22,7 @@ const Day = ({
             data-local={local}
             onClick={() => {
                 handleSelect(date)
-                setPropsValue(`${year} ${month} ${date}`);
+                setPropsValue(`${year}-${month}-${date}`);
             }}
         >
             <div className={`calendarien--day__date`}>{ date }</div>
