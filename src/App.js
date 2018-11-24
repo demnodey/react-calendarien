@@ -33,6 +33,12 @@ class App extends Component {
                 <Calendarien
                     getValue={handleSelect}
                     setFormat={"bm dd, yyyy"}
+                    style={
+                        {
+                            background: "linear-gradient(to right bottom, #000, #fff)",
+                            color: "#fff"
+                        }
+                    }
                 />
 
                 {date}

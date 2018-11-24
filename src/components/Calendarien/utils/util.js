@@ -14,6 +14,17 @@ export const ymd = (date) => {
     }
 }
 
+export const pnCalculator = ({year, month}, operator) => {
+
+    const _m = parseInt(month, 10) + (1 * operator);
+
+    switch (_m) {
+        case 0 : return { y: year - 1, m: 12 };
+        case 13 : return { y: year + 1, m: 1 };
+        default : return { y: year, m: _m };
+    }
+}
+
 export const line = (start, end) => {
     const wc = WEEK_COUNT.length;
     const diver = end - start;
@@ -29,8 +40,5 @@ export const line = (start, end) => {
     };
 }
 
-export const joinstr = (strArr) => {
-    return strArr.join(" ");
-}
-
-export const createArray = (size) => Array.apply(null, Array(size))
+export const joinstr = (strArr) => strArr.join(" ");
+export const createArray = (size) => Array.apply(null, Array(size));

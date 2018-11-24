@@ -1,16 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Week.css";
 
 import Day from "../Day";
 
-const Week = ({data, children, handleSelect, setPropsValue, ...rest}) => {
-    
+const Week = ({data, handleSelect, setPropsValue, handleMonthChange, ...rest}) => {
     const days = data.map((d, i) => {
         return (
             <Day 
                 key={i} 
                 handleSelect={handleSelect} 
                 setPropsValue={setPropsValue}
+                handleMonthChange={handleMonthChange}
                 {...d} 
             />
         )
@@ -21,6 +22,14 @@ const Week = ({data, children, handleSelect, setPropsValue, ...rest}) => {
             {days}
         </div>
     )
+}
+
+Week.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object),
+    handleSelect: PropTypes.func,
+    setPropsValue: PropTypes.func,
+    handleMonthChange: PropTypes.func
+
 }
 
 export default Week;

@@ -47,7 +47,7 @@ export const LAST_DATE = date => {
 
 export const MOVE_MONTH = (milliseconds, move) => {
     const _move = parseInt(move, 10);
-    const _milliseconds = parseInt(milliseconds, 10)
+    const _milliseconds = parseInt(milliseconds, 10);
     const { month } = timeflow;
 
     if (isNaN(_move)) {

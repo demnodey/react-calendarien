@@ -3,12 +3,19 @@ import "./Viewer.css";
 
 import Week from "../Week";
 
-import { WEEK_COUNT, CREATE, START_DAY, LAST_DATE } from "../../utils/dates";
-import { line, createArray, ymd } from "../../utils/util";
+import { WEEK_COUNT, CREATE, START_DAY, LAST_DATE, MOVE_MONTH } from "../../utils/dates";
+import { line, createArray, ymd, pnCalculator } from "../../utils/util";
 
-const Viewer = ({value, selectedValue, setPropsValue, handleSelect}) => {
+const Viewer = ({
+        value, 
+        selectedValue, 
+        setPropsValue, 
+        handleSelect,
+        handleMonthChange
+    }) => {
 
     let startDate = 0;
+    let nextDate = 0;
 
     const _today = CREATE().getDate();
     const _tomonth = CREATE().getMonth() + 1;
@@ -17,6 +24,11 @@ const Viewer = ({value, selectedValue, setPropsValue, handleSelect}) => {
     const { total } = line(start, end);
     
     const prototyper = createArray(total);
+
+    const prevMonth = MOVE_MONTH(value, -1);
+    const prevLastDate = LAST_DATE(prevMonth);
+
+    let prevDate = prevLastDate - start;
 
     const { 
         y : year, 
@@ -28,12 +40,9 @@ const Viewer = ({value, selectedValue, setPropsValue, handleSelect}) => {
         const data = WEEK_COUNT.map((_d, _i) => {
 
             const realDate = startDate + 1;
-            let selected = realDate === (selectedValue || day);
-            let today = realDate === _today;
-
-            if (_tomonth !== month) {
-                today = false;
-            }
+            const _selected = !selectedValue ? day : selectedValue;
+            const selected = realDate === _selected;
+            const today = _tomonth !== month ? false : realDate === _today;
 
             if (i === 0 && _i >= start) {
                 startDate++;
@@ -42,7 +51,27 @@ const Viewer = ({value, selectedValue, setPropsValue, handleSelect}) => {
                 startDate++;
                 return {date: startDate, year, month, today, selected, local: 'current'}
             } else {
-                return {date: null, year, month, today: false, selected: false, local: ''}
+                if (i === 0) {
+                    const {
+                        y : prevYear,
+                        m : prevMonth
+                    } = pnCalculator({year, month}, -1);
+
+                    // console.log(prevMonth," ",prevYear);
+
+                    prevDate++
+                    return {date: prevDate, year: prevYear, month: prevMonth, selected, local: 'prev'}
+                } else {
+                    const {
+                        y : nextYear,
+                        m : nextMonth
+                    } = pnCalculator({year, month}, 1);
+
+                    // console.log(nextMonth," ",nextYear);
+
+                    nextDate++
+                    return {date: nextDate, year: nextYear, month: nextMonth, selected, local: 'next'}    
+                }
             }
         })
 
@@ -52,6 +81,7 @@ const Viewer = ({value, selectedValue, setPropsValue, handleSelect}) => {
                 data={data} 
                 handleSelect={handleSelect}
                 setPropsValue={setPropsValue}
+                handleMonthChange={handleMonthChange}
             />
         )
     });

@@ -22,3 +22,7 @@
 .calenderien--day__current:hover {
     background-color: rgba(255, 182, 169, 0.5);
 }
+
+.calenderien--day:not(.calenderien--day__current) {
+    color: #cacaca;
+}

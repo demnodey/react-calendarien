@@ -48,9 +48,7 @@ class Calendarien extends Component {
     }
 
     handleMonthChange = (value) => {
-        this.setState({ 
-            value
-        })
+        this.setState({ value })
     }
 
     onMyDate = () => {
@@ -109,6 +107,7 @@ class Calendarien extends Component {
                 <Viewer
                     value={value}
                     handleSelect={handleSelect}
+                    handleMonthChange={handleMonthChange}
                     selectedValue={selectedValue}
                     setPropsValue={setPropsValue}
                 />
