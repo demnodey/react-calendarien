@@ -8,7 +8,7 @@ export const ymd = (date) => {
     const _date = CREATE(date);
     return {
         y : _date.getFullYear(),
-        m : zero(_date.getMonth() + 1),
+        m : _date.getMonth() + 1,
         d : _date.getDate(),
         date
     }
@@ -40,5 +40,15 @@ export const line = (start, end) => {
     };
 }
 
-export const joinstr = (strArr) => strArr.join(" ");
+export const joinstr = (strArr, Arr) => {
+
+    if (typeof strArr === 'string') {
+        if (Array.isArray(Arr) && Arr.length === 0) return strArr;
+        Arr = [strArr, ...Arr];
+        return Arr.join(" ");
+    }
+
+    return strArr.join(" ");
+};
+
 export const createArray = (size) => Array.apply(null, Array(size));

@@ -28,14 +28,15 @@ name|type|default|description
 style|object|{ <br/>width:'100%'<br/>height: 'inheriet'<br/>color: '#262626'<br/>}|layout 의 스타일을 담을 수 있습니다.
 getValue|function||선택한 날의 정보를 가져올 수 있습니다. <br/> default return "yyyy mm dd"
 customizeIcon|array|[ ]|버튼을 커스터마이징 할 수 있습니다. <br/> default icon <, >
+layoutOption|array|[ ]|layout 의 디자인을 조금 변경가능하다. <br/> 값 .. ['outline', 'radius']
 setFormat|string|yyyy mm dd|getValue 에서 return 되는 데이터의 형태를 바꿀 수 있습니다.
 setDate|string||원하는 날의 달력을 render 시에 보여준다.<br/>하단에 'MY DATE' 버튼이 함께 생성된다.
 visibleToday|boolean|false|하단 "TODAY" 버튼 가시화
 visibleMyDate|boolean|false|setDate 옵션 추가시 자동적으로 나오는 'MY DATE' 버튼의 가시화를 정한다.
+disabled|boolean|false|이전 날짜는 선택하지 못하도록 막는 기능이다.
 
 ## Will be Update Function or Value
 - mode
-- disabled
 - allowRange
 
 ## Connect

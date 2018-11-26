@@ -4,11 +4,22 @@ import "./Week.css";
 
 import Day from "../Day";
 
-const Week = ({data, handleSelect, setPropsValue, handleMonthChange, ...rest}) => {
+const Week = ({
+        data, 
+        disabled,
+        now,
+        handleSelect, 
+        setPropsValue, 
+        handleMonthChange, 
+        ...rest
+    }) => {
+
     const days = data.map((d, i) => {
         return (
             <Day 
                 key={i} 
+                disabled={disabled}
+                now={now}
                 handleSelect={handleSelect} 
                 setPropsValue={setPropsValue}
                 handleMonthChange={handleMonthChange}

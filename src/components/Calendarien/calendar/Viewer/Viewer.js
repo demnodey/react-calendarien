@@ -2,6 +2,7 @@ import React from "react";
 import "./Viewer.css";
 
 import Week from "../Week";
+import DayOfWeek from "../DayOfWeek";
 
 import { WEEK_COUNT, CREATE, START_DAY, LAST_DATE, MOVE_MONTH } from "../../utils/dates";
 import { line, createArray, ymd, pnCalculator } from "../../utils/util";
@@ -9,7 +10,9 @@ import { line, createArray, ymd, pnCalculator } from "../../utils/util";
 const Viewer = ({
         value, 
         selectedValue, 
-        setPropsValue, 
+        setPropsValue,
+        disabled,
+        now,
         handleSelect,
         handleMonthChange
     }) => {
@@ -22,9 +25,7 @@ const Viewer = ({
     const start = START_DAY(value); // of week ex) sunday 0, monday 1 ...
     const end = LAST_DATE(value); // of date
     const { total } = line(start, end);
-    
     const prototyper = createArray(total);
-
     const prevMonth = MOVE_MONTH(value, -1);
     const prevLastDate = LAST_DATE(prevMonth);
 
@@ -57,28 +58,26 @@ const Viewer = ({
                         m : prevMonth
                     } = pnCalculator({year, month}, -1);
 
-                    // console.log(prevMonth," ",prevYear);
-
                     prevDate++
-                    return {date: prevDate, year: prevYear, month: prevMonth, selected, local: 'prev'}
+                    return {date: prevDate, year: prevYear, month: prevMonth, selected: false, local: 'prev'}
                 } else {
                     const {
                         y : nextYear,
                         m : nextMonth
                     } = pnCalculator({year, month}, 1);
 
-                    // console.log(nextMonth," ",nextYear);
-
                     nextDate++
-                    return {date: nextDate, year: nextYear, month: nextMonth, selected, local: 'next'}    
+                    return {date: nextDate, year: nextYear, month: nextMonth, selected : false, local: 'next'}    
                 }
             }
         })
 
         return (
             <Week 
-                key={`${i}`} 
-                data={data} 
+                key={i} 
+                data={data}
+                disabled={disabled}
+                now={now}
                 handleSelect={handleSelect}
                 setPropsValue={setPropsValue}
                 handleMonthChange={handleMonthChange}
@@ -88,6 +87,7 @@ const Viewer = ({
 
     return (
         <div className="calendarien--viewer">
+            <DayOfWeek/>
             {WeekRow}
         </div>
     )

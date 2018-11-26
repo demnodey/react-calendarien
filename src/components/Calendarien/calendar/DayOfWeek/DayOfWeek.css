@@ -1,0 +1,15 @@
+.calendarien--dow {
+    height: 24px;
+    padding-top: 12px;
+    padding-bottom: 6px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.calendarien--dow span {
+    font-size: .8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -.3px;
+}

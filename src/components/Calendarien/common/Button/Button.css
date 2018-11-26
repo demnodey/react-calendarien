@@ -20,6 +20,7 @@
 
 .btn__prev, .btn__next {
     font-size: 24px;
+    background-color: transparent;
 }
 
 .btn.btn__default {

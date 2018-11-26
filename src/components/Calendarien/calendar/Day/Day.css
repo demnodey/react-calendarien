@@ -11,18 +11,28 @@
     box-sizing: border-box;
 }
 
-.calenderien--day.today .calendarien--day__date {
-    border-bottom: 3px solid crimson;
+.calenderien--day.today {
+    border: 2px solid rgb(72, 127, 255);
 }
 
 .calenderien--day.selected {
-    background-color: rgba(255, 182, 169, 0.5);
+    background-color: rgba(191, 210, 255, 0.5);
+}
+
+.calenderien--day.disabled {
+    color: #e6e6e6 !important;
+    background-color: #fff !important;
+    cursor: not-allowed !important;
 }
 
 .calenderien--day__current:hover {
-    background-color: rgba(255, 182, 169, 0.5);
+    background-color: rgba(183, 205, 255, .5);
 }
 
 .calenderien--day:not(.calenderien--day__current) {
-    color: #cacaca;
+    color: #b8b8b8;
+}
+
+.calenderien--day:not(.calenderien--day__current):hover {
+    background-color: #ececec;
 }

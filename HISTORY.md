@@ -2,11 +2,14 @@
 ---
 
 Will Update Function ::<br/>
-theme 만들기<br/>
-disabled 기능 추가하기<br/>
 allowRange 기능 추가하기<br/>
-모듈 적용해보기
+모듈 적용해보기<br>
 
+### <p>Update #5</p> 
+2018 11 26 :: <br/>
+몇가지 버그 수정 및 layout 디자인 옵션추가. outline, radius <br/>
+DayOfWeek 추가<br/>
+disabled 기능 추가 :: 코드 수정 예정...
 
 ### <p>Update #5</p> 
 2018 11 23 :: <br/>

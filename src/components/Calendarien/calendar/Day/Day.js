@@ -1,7 +1,7 @@
 import React from "react";
 import "./Day.css";
 
-import { MOVE_MONTH, CREATE } from "../../utils/dates";
+import { CREATE } from "../../utils/dates";
 
 const Day = ({
         date,
@@ -10,29 +10,45 @@ const Day = ({
         today,
         local,
         selected,
+        disabled,
+        now,
         handleSelect,
         setPropsValue,
         handleMonthChange
     }) => {
 
-    const _today = today ? 'today' : "";
-    const _selected = selected ? 'selected' : "";
-    const _class = [_today, _selected];
     const _date = `${year}-${month}-${date}`;
     const milllitime = CREATE(_date).getTime();
+    
+    function handleEvent () {
+        if (local !== 'current') handleMonthChange(milllitime);
+        handleSelect(date)
+        setPropsValue(_date);
+    }
+
+    let _disabled = '';
+    const _today = today ? 'today' : '';
+    const _selected = selected ? 'selected' : '';
+
+    if (disabled) {
+        if (now > milllitime) {
+            _disabled = disabled ? 'disabled' : '';
+        }
+    }
+
+    const _class = [_today, _selected, _disabled];
+    const cs = _class.filter( d => d !== "");
 
     return (
         <div 
-            className={`calenderien--day calenderien--day__${local} ${_class.join(" ")}`}
+            className={`calenderien--day calenderien--day__${local} ${cs.join(" ")}`}
             data-local={local}
             onClick={() => {
-
-                if (local !== 'current') {
-                    handleMonthChange(milllitime);
+                if (disabled) {
+                    now < milllitime && handleEvent();
+                } else {
+                    handleEvent();
                 }
-
-                handleSelect(date)
-                setPropsValue(_date);
             }}
         >
             <div className={`calendarien--day__date`}>{ date }</div>

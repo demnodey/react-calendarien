@@ -9,6 +9,7 @@ import Viewer from "./calendar/Viewer";
 
 import { MILLISECONDS, CREATE } from "./utils/dates";
 import { format } from "./utils/format";
+import { joinstr } from "./utils/util";
 
 class Calendarien extends Component {
 
@@ -18,12 +19,13 @@ class Calendarien extends Component {
             height: 'inheriet',
             color: '#262626'
         },
-        setFormat: '',
+        format: '',
         setDate: '',
         mode : 'default',
         visibleMyDate: false,
         visibleToday: false,
         disabled : false,
+        layoutOption: [],
         customizeIcon: [],
         allowRange : [],
         getValue: () => {},
@@ -60,8 +62,8 @@ class Calendarien extends Component {
     }
 
     setPropsValue = (selectValue) => {
-        const { getValue, setFormat } = this.props;
-        const result = !setFormat ? selectValue : format(setFormat, selectValue);
+        const { getValue, format: fm } = this.props;
+        const result = !fm ? selectValue : format(fm, selectValue);
 
         getValue(result);
     }
@@ -86,7 +88,9 @@ class Calendarien extends Component {
 
         const { 
             style,
+            layoutOption,
             customizeIcon,
+            disabled,
             visibleMyDate,
             visibleToday,
             setDate
@@ -97,8 +101,11 @@ class Calendarien extends Component {
             selectedValue
         } = this.state;
 
+        const now = Date.now();
+        const classnameJoin = joinstr("calendarien", layoutOption);
+
         return (
-            <Layout className="calendarien" style={style}>
+            <Layout className={classnameJoin} style={style}>
                 <Header 
                     value={value} 
                     customizeIcon={customizeIcon}
@@ -110,6 +117,8 @@ class Calendarien extends Component {
                     handleMonthChange={handleMonthChange}
                     selectedValue={selectedValue}
                     setPropsValue={setPropsValue}
+                    disabled={disabled}
+                    now={now}
                 />
                 <Footer
                     visibleMyDate={visibleMyDate}
@@ -128,7 +137,7 @@ Calendarien.propTypes = {
         background: PropTypes.string
     }),
     mode: PropTypes.string,
-    disabled: PropTypes.bool,
+    layoutOption: PropTypes.arrayOf(PropTypes.string),
     customizeIcon: PropTypes.arrayOf(
         PropTypes.oneOfType([
             PropTypes.object, 
@@ -137,8 +146,10 @@ Calendarien.propTypes = {
     ),
     allowRange: PropTypes.arrayOf(PropTypes.string),
     setDate: PropTypes.string,
-    setFormat: PropTypes.string,
+    format: PropTypes.string,
+    disabled: PropTypes.bool,
     visibleToday: PropTypes.bool,
+    visibleMyDate: PropTypes.bool,
     getValue: PropTypes.func,
 }
 

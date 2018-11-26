@@ -1,0 +1,12 @@
+.calendarien {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.calendarien.outline {
+    border: 2px solid #000;
+}
+
+.calendarien.outline.radius {
+    border-radius: 5px;
+}

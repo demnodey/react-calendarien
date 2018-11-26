@@ -59,3 +59,4 @@ export const MOVE_MONTH = (milliseconds, move) => {
  
 export const FULL_MONTH = n => fm[n];
 export const SHORT_MONTH = n => sm[n];
+export const DOWM = ['Sun', 'Mon', 'Tue', 'Wen', 'Tur', 'Fri', 'Sat'];
