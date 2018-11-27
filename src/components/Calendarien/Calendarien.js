@@ -9,25 +9,26 @@ import Viewer from "./calendar/Viewer";
 
 import { MILLISECONDS, CREATE } from "./utils/dates";
 import { format } from "./utils/format";
-import { joinstr } from "./utils/util";
+import { joinstr, isValid } from "./utils/util";
 
 class Calendarien extends Component {
 
     static defaultProps = {
         style : {
             width: '100%',
-            height: 'inheriet',
+            height: 'inherit',
             color: '#262626'
         },
         format: '',
         setDate: '',
+        theme: '',
         mode : 'default',
         visibleMyDate: false,
         visibleToday: false,
         disabled : false,
+        allowRange : false,
         layoutOption: [],
         customizeIcon: [],
-        allowRange : [],
         getValue: () => {},
     }
 
@@ -73,7 +74,17 @@ class Calendarien extends Component {
     }
 
     componentDidUpdate (prevProps, prevState) {
+        const { setDate } = this.props;
 
+        if (prevProps.setDate !== this.props.setDate) {
+            const is = isValid(setDate);
+
+            if (is) {
+                this.initialize();
+            } else {
+                console.warn('Please fill in the correct date format \n 18 01 01 (x) \n 2018 01 01 (o)');
+            }
+        }
     }
 
     render () {
@@ -88,11 +99,12 @@ class Calendarien extends Component {
 
         const { 
             style,
+            theme,
             layoutOption,
             customizeIcon,
-            disabled,
             visibleMyDate,
             visibleToday,
+            disabled,
             setDate
         } = this.props;
 
@@ -105,7 +117,7 @@ class Calendarien extends Component {
         const classnameJoin = joinstr("calendarien", layoutOption);
 
         return (
-            <Layout className={classnameJoin} style={style}>
+            <Layout className={classnameJoin} theme={theme} style={style}>
                 <Header 
                     value={value} 
                     customizeIcon={customizeIcon}
@@ -137,6 +149,13 @@ Calendarien.propTypes = {
         background: PropTypes.string
     }),
     mode: PropTypes.string,
+    theme: PropTypes.string,
+    setDate: PropTypes.string,
+    format: PropTypes.string,
+    disabled: PropTypes.bool,
+    visibleToday: PropTypes.bool,
+    visibleMyDate: PropTypes.bool,
+    allowRange: PropTypes.bool,
     layoutOption: PropTypes.arrayOf(PropTypes.string),
     customizeIcon: PropTypes.arrayOf(
         PropTypes.oneOfType([
@@ -144,12 +163,6 @@ Calendarien.propTypes = {
             PropTypes.string,
         ])
     ),
-    allowRange: PropTypes.arrayOf(PropTypes.string),
-    setDate: PropTypes.string,
-    format: PropTypes.string,
-    disabled: PropTypes.bool,
-    visibleToday: PropTypes.bool,
-    visibleMyDate: PropTypes.bool,
     getValue: PropTypes.func,
 }
 

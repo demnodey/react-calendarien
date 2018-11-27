@@ -42,7 +42,7 @@ const Day = ({
     return (
         <div 
             className={`calenderien--day calenderien--day__${local} ${cs.join(" ")}`}
-            data-local={local}
+            // data-local={local}
             onClick={() => {
                 if (disabled) {
                     now < milllitime && handleEvent();

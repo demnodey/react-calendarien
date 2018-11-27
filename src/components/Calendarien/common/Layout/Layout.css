@@ -7,6 +7,116 @@
     border: 2px solid #000;
 }
 
-.calendarien.outline.radius {
+.calendarien.radius {
     border-radius: 5px;
+}
+
+
+/* original theme*/
+
+/* darkblue */
+[theme='darkblue'] {
+    background-color: #0a081f;
+    color: #fff !important;
+}
+
+[theme='darkblue'] .calenderien--day.today {
+    border: 2px solid #e6ca67;
+}
+
+[theme='darkblue'] .calenderien--day__current:hover {
+    background-color: rgba(230, 202, 103, 0.5);
+}
+
+[theme='darkblue'] .calenderien--day.selected {
+    background-color: rgba(230, 202, 103, 0.5);
+}
+
+[theme='darkblue'] .calenderien--day:not(.calenderien--day__current) {
+    color: #6a739b;
+}
+
+[theme='darkblue'] .calenderien--day:not(.calenderien--day__current):hover {
+    background-color: rgba(106, 115, 155, 0.5);
+}
+
+/* forest */
+[theme='forest'] {
+    background-color: #15201a;
+    color: #84a78b !important;
+}
+
+[theme='forest'] .calenderien--day.today {
+    border: 2px solid #531d00
+}
+
+[theme='forest'] .calenderien--day__current:hover {
+    background-color: rgba(82, 29, 0, 0.5);
+}
+
+[theme='forest'] .calenderien--day.selected {
+    background-color: rgba(82, 29, 0, 0.5);
+}
+
+[theme='forest'] .calenderien--day:not(.calenderien--day__current) {
+    color: #9c3a05;
+}
+
+[theme='forest'] .calenderien--day:not(.calenderien--day__current):hover {
+    background-color: rgba(156, 58, 5, 0.2);
+}
+
+/* gradation theme */
+
+/* gd_darkblue */
+[theme='gd_darkblue'] {
+    background-image: linear-gradient(to bottom right, #0a081f 30%, #1d1a4f, #413ca3);
+    color: #fff !important;
+}
+
+[theme='gd_darkblue'] .calenderien--day.today {
+    border: 2px solid #e6ca67;
+}
+
+[theme='gd_darkblue'] .calenderien--day__current:hover {
+    background-color: rgba(230, 202, 103, 0.5);
+}
+
+[theme='gd_darkblue'] .calenderien--day.selected {
+    background-color: rgba(230, 202, 103, 0.5);
+}
+
+[theme='gd_darkblue'] .calenderien--day:not(.calenderien--day__current) {
+    color: #6a739b;
+}
+
+[theme='gd_darkblue'] .calenderien--day:not(.calenderien--day__current):hover {
+    background-color: rgba(106, 115, 155, 0.5);
+}
+
+/* gd_sunset */
+
+[theme='gd_sunset'] {
+    background-image: linear-gradient(to bottom, #e41717, #ffc04b);
+    color: #0c0c0c !important;
+}
+
+[theme='gd_sunset'] .calenderien--day.today {
+    border: 2px solid #5d2200;
+}
+
+[theme='gd_sunset'] .calenderien--day__current:hover {
+    background-color: rgba(0,0,0, 0.2);
+}
+
+[theme='gd_sunset'] .calenderien--day.selected {
+    background-color: rgba(0,0,0, 0.2);
+}
+
+[theme='gd_sunset'] .calenderien--day:not(.calenderien--day__current) {
+    color: #ffd3a0;
+}
+
+[theme='gd_sunset'] .calenderien--day:not(.calenderien--day__current):hover {
+    background-color: rgba(255, 211, 160, 0.5);
 }

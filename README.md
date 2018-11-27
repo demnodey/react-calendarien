@@ -6,26 +6,10 @@
 
 !! **주의** IE 에서는 아직 동작하지 않습니다. (Edge 는 가능합니다.)
 
-## Useage
-create-react-app 을 사용했을 때의 경우 아래와 같이 테스트 합니다.
-```jsx
-import React, { Component } from "react";
-import Calendarien from 'components/Calendarien';
-
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <Calendarien />
-            </div>
-        )
-    }
-} 
-```
 ## Props
 name|type|default|description
 ----|----|-------|-----------
-style|object|{ <br/>width:'100%'<br/>height: 'inheriet'<br/>color: '#262626'<br/>}|layout 의 스타일을 담을 수 있습니다.
+style|object|{ <br/>width:'100%'<br/>height: 'inherit'<br/>color: '#262626'<br/>}|layout 의 스타일을 담을 수 있습니다.
 getValue|function||선택한 날의 정보를 가져올 수 있습니다. <br/> default return "yyyy mm dd"
 customizeIcon|array|[ ]|버튼을 커스터마이징 할 수 있습니다. <br/> default icon <, >
 layoutOption|array|[ ]|layout 의 디자인을 조금 변경가능하다. <br/> 값 .. ['outline', 'radius']
@@ -34,6 +18,56 @@ setDate|string||원하는 날의 달력을 render 시에 보여준다.<br/>하�
 visibleToday|boolean|false|하단 "TODAY" 버튼 가시화
 visibleMyDate|boolean|false|setDate 옵션 추가시 자동적으로 나오는 'MY DATE' 버튼의 가시화를 정한다.
 disabled|boolean|false|이전 날짜는 선택하지 못하도록 막는 기능이다.
+theme|string||달력테마 디자인을 설정합니다.<br> darkblue, forest, gd_darkblue, gd_sunset<br/> * gd가 붙은건 그라데이션을 의미함
+
+## Useage
+create-react-app 을 사용했을 때의 경우 아래와 같이 테스트 합니다.
+
+### 1. default example
+---
+```jsx
+import React, { Component } from "react";
+import Calendarien from 'components/Calendarien';
+
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Calendarien props... />
+            </div>
+        )
+    }
+} 
+```
+
+### 2. real time change 'setDate' example
+---
+```jsx
+class App extends Component {
+
+    handleDate = ({ value : date }) => {
+         this.setState({ date });
+    }
+
+    state = {
+        date: ''
+    }
+    
+    render () {
+        const { date } = this.state;
+        return (
+            <div>
+                <Calendarien setDate={date} />
+                <input 
+                    type="text"  
+                    onKeyPress={({key, target}) => key === 'Enter' && this.handleDate(target)} 
+                />
+            </div>
+        )
+    }
+}
+```
+> date form 이 맞지 않을시 console.warn 을 출력합니다.
 
 ## Will be Update Function or Value
 - mode

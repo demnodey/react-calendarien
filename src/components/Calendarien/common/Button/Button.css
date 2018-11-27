@@ -4,6 +4,7 @@
     border: 0;
     outline: none;
     cursor: pointer;
+    color: inherit;
 }
 
 .btn * {

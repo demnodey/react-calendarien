@@ -51,4 +51,12 @@ export const joinstr = (strArr, Arr) => {
     return strArr.join(" ");
 };
 
+export const isValid = (d) => {
+    if (typeof d !== 'string') return false;
+    const check = new Date(d);
+    if (typeof check !== 'object') return false;
+    if (isNaN(check.getDate())) return false;
+    return true;
+}
+
 export const createArray = (size) => Array.apply(null, Array(size));
