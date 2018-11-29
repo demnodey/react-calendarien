@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Calendarien from "./components/Calendarien";
-
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import Calendarien from "./Calendarien";
 
 class App extends Component {
 
@@ -13,16 +11,7 @@ class App extends Component {
 
         return (
             <div className="App" style={style}>
-                <Calendarien 
-                    customizeIcon={[
-                        <MdKeyboardArrowLeft/>,
-                        <MdKeyboardArrowRight/>
-                    ]}
-                    theme={'darkblue'}
-                    layoutOption={['radius']}
-                    disabled={true}
-                />
-               
+                <Calendarien />
             </div>
         );
     }

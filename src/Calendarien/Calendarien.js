@@ -113,7 +113,7 @@ class Calendarien extends Component {
             selectedValue
         } = this.state;
 
-        const now = Date.now();
+        const now = disabled ? Date.now() : 0;
         const classnameJoin = joinstr("calendarien", layoutOption);
 
         return (

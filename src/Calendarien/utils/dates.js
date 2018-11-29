@@ -26,7 +26,7 @@ export const CREATE = (date) => {
     return new Date(date);
 }
 
-// 
+
 export const START_DAY = (date) => {
     const _ymd = ymd(date);
     const startDay = new Date(`${_ymd.y}-${(_ymd.m)}`).getDay();

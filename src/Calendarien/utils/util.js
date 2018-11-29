@@ -8,8 +8,8 @@ export const ymd = (date) => {
     const _date = CREATE(date);
     return {
         y : _date.getFullYear(),
-        m : _date.getMonth() + 1,
-        d : _date.getDate(),
+        m : zero(_date.getMonth() + 1),
+        d : zero(_date.getDate()),
         date
     }
 }

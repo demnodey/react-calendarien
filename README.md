@@ -21,13 +21,14 @@ disabled|boolean|false|이전 날짜는 선택하지 못하도록 막는 기능�
 theme|string||달력테마 디자인을 설정합니다.<br> darkblue, forest, gd_darkblue, gd_sunset<br/> * gd가 붙은건 그라데이션을 의미함
 
 ## Useage
-create-react-app 을 사용했을 때의 경우 아래와 같이 테스트 합니다.
+create-react-app 을 사용했을 때의 경우 아래와 같이 테스트 합니다.<br/>
+
 
 ### 1. default example
 ---
 ```jsx
 import React, { Component } from "react";
-import Calendarien from 'components/Calendarien';
+import Calendarien from './Calendarien';
 
 class App extends Component {
     render() {
@@ -72,6 +73,21 @@ class App extends Component {
 ## Will be Update Function or Value
 - mode
 - allowRange
+
+## If you are using an IE browser, you should read this
+!! IE 적용시 react-app-polyfill 을 추가해야합니다.<br/>
+
+<code>
+> yarn add react-app-polyfill
+</code>
+
+```jsx
+// index.js
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+(... import code)
+(... render code)
+```
 
 ## Connect
 Made by demnodey

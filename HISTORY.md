@@ -4,6 +4,16 @@
 
 - allowRange 기능 추가하기
 
+## Update #8
+#### 2018 11 29
+- 코드 최소화
+- PropTypes 적용 안되있는 props 적용
+- IE 브라우저 문제점 해결. ( development 모드에서 cdn polyfill script 링크가 필요하다. ) 
+  - 1.index.html에 script 태그 적용 ( 링크 :: //cdn.polyfill.io/v2/polyfill.min.js )
+  - 2.ployfill 적용하기 > yarn add react-app-polyfill ( import 'react-app-polyfill/ie9 or ie11')
+- IE, Edge 에서 나던 Date 연산 오류 수정
+- Calendarien 폴더 위치 수정
+---
 
 ## Update #7
 #### 2018 11 27
