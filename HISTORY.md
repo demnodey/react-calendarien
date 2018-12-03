@@ -4,6 +4,14 @@
 
 - allowRange 기능 추가하기
 
+## Update #9
+#### 2018 12 03
+- input mode 추가
+- Button 및 기타 전체적인 디자인 수정
+- 'TODAY' 버튼 기능 개선 ( 오늘 날짜 선택됨 )
+- next, prev 기본 아이콘을 html unicode icon 으로 교체 
+---
+
 ## Update #8
 #### 2018 11 29
 - 코드 최소화

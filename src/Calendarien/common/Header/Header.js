@@ -14,7 +14,11 @@ const Header = ({ value, customizeIcon, handleMonthChange }) => (
             handleEvent={handleMonthChange} 
             action={() => MOVE_MONTH(value, -1)}
         >
-            { !customizeIcon[0] ? ("<") : (customizeIcon[0]) }
+            { 
+                !customizeIcon[0] ? 
+                ( <span dangerouslySetInnerHTML={{__html : '&lsaquo;'}}></span> ) : 
+                ( customizeIcon[0] ) 
+            }
         </Button>
 
         <div className="calendarien--header__title">
@@ -26,7 +30,11 @@ const Header = ({ value, customizeIcon, handleMonthChange }) => (
             handleEvent={handleMonthChange}
             action={() => MOVE_MONTH(value, 1)}
         >
-            { !customizeIcon[1] ? (">") : (customizeIcon[1]) }
+            { 
+                !customizeIcon[1] ? 
+                ( <span dangerouslySetInnerHTML={{__html : '&rsaquo;'}}></span> ) :  
+                ( customizeIcon[1] ) 
+            }
         </Button>
     </div>
 );

@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import Layout from "./common/Layout";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
+import Input from "./common/Input";
 
 import Viewer from "./calendar/Viewer";
+import Status from "./calendar/Status";
 
 import { MILLISECONDS, CREATE } from "./utils/dates";
 import { format } from "./utils/format";
@@ -23,10 +25,12 @@ class Calendarien extends Component {
         setDate: '',
         theme: '',
         mode : 'default',
+        inputClass: '',
         visibleMyDate: false,
         visibleToday: false,
         disabled : false,
         allowRange : false,
+        setRange : [],
         layoutOption: [],
         customizeIcon: [],
         getValue: () => {},
@@ -34,7 +38,13 @@ class Calendarien extends Component {
 
     state = {
         value : MILLISECONDS(),
-        selectedValue : 0
+        selectedValue : 0,
+        mode : {
+            input : ''
+        },
+        modal: {
+            input: false
+        }
     }
 
     initialize = () => {
@@ -58,15 +68,38 @@ class Calendarien extends Component {
         this.initialize();
     }
 
-    onToday = (value) => {
-        this.setState({ value })
+    onToday = ({value, selectedValue}) => {
+        this.setState({ value, selectedValue })
     }
 
     setPropsValue = (selectValue) => {
-        const { getValue, format: fm } = this.props;
+        const { getValue, format: fm, mode } = this.props;
         const result = !fm ? selectValue : format(fm, selectValue);
 
+        if ( mode === 'input') {
+            const { setInputValue } = this;
+            setInputValue(result);
+        }
+
         getValue(result);
+    }
+
+    setInputValue = (value) => {
+        this.setState({ mode : { input : value }})
+    }
+
+    handleModal = (bool) => {
+        this.setState((prevState) => ({ modal : { ...prevState.modal, input: bool } }));
+    }
+
+    handleModalClear = () => {
+        const { getValue } = this.props;
+        this.setState({ mode : {input: ''}});
+        getValue('');
+    }
+
+    handleModalSubmit = () => {
+        this.setState({ modal : {input: false}})
     }
 
     componentDidMount () {
@@ -94,52 +127,73 @@ class Calendarien extends Component {
             handleMonthChange,
             setPropsValue,
             onMyDate,
-            onToday
+            onToday,
+            handleModal,
+            handleModalClear,
+            handleModalSubmit
         } = this;
 
         const { 
             style,
             theme,
+            inputClass,
             layoutOption,
             customizeIcon,
             visibleMyDate,
             visibleToday,
             disabled,
-            setDate
+            setDate,
+            mode,
         } = this.props;
 
         const { 
             value,
-            selectedValue
+            selectedValue,
+            modal,
+            mode : _mode
         } = this.state;
 
         const now = disabled ? Date.now() : 0;
         const classnameJoin = joinstr("calendarien", layoutOption);
+        const _modal = modal[mode] ? 'modal__' + mode : ''; 
 
         return (
-            <Layout className={classnameJoin} theme={theme} style={style}>
-                <Header 
-                    value={value} 
-                    customizeIcon={customizeIcon}
-                    handleMonthChange={handleMonthChange}
-                />
-                <Viewer
-                    value={value}
-                    handleSelect={handleSelect}
-                    handleMonthChange={handleMonthChange}
-                    selectedValue={selectedValue}
-                    setPropsValue={setPropsValue}
-                    disabled={disabled}
-                    now={now}
-                />
-                <Footer
-                    visibleMyDate={visibleMyDate}
-                    visibleToday={visibleToday}
-                    setDate={setDate}
-                    onMyDate={onMyDate}
-                    onToday={onToday}
-                />
-            </Layout>
+            <div className={`demnodey ${_modal}`} >
+                <Input className={inputClass} mode={mode} value={_mode.input} onFocus={handleModal} readOnly />
+                <Layout className={classnameJoin} theme={theme} mode={mode} style={style}>
+
+                    { mode !== 'default' && <Status value={_mode.input}/> }
+
+                    <Header 
+                        value={value} 
+                        customizeIcon={customizeIcon}
+                        handleMonthChange={handleMonthChange}
+                    />
+
+                    <Viewer
+                        value={value}
+                        handleSelect={handleSelect}
+                        handleMonthChange={handleMonthChange}
+                        selectedValue={selectedValue}
+                        setPropsValue={setPropsValue}
+                        disabled={disabled}
+                        now={now}
+                    />
+
+                    <Footer
+                        visibleMyDate={visibleMyDate}
+                        visibleToday={visibleToday}
+                        setDate={setDate}
+                        mode={mode}
+                        modal={modal}
+                        onMyDate={onMyDate}
+                        onToday={onToday}
+                        onClear={handleModalClear}
+                        onSubmit={handleModalSubmit}
+                    />
+
+                </Layout>
+            </div>
         )
     }
 }
@@ -156,6 +210,7 @@ Calendarien.propTypes = {
     visibleToday: PropTypes.bool,
     visibleMyDate: PropTypes.bool,
     allowRange: PropTypes.bool,
+    setRange: PropTypes.arrayOf(PropTypes.number),
     layoutOption: PropTypes.arrayOf(PropTypes.string),
     customizeIcon: PropTypes.arrayOf(
         PropTypes.oneOfType([

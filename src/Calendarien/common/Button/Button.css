@@ -1,10 +1,14 @@
 .btn {
     display: inline-block;
     background: #fff;
+    padding: 6px 8px;
     border: 0;
     outline: none;
     cursor: pointer;
-    color: inherit;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    transition: all .3s;
 }
 
 .btn * {
@@ -21,18 +25,43 @@
 
 .btn__prev, .btn__next {
     font-size: 24px;
+    padding: 0;
     background-color: transparent;
 }
 
+/* default */
+
 .btn.btn__default {
-    border-radius: 3px;
     background-color: rgb(204, 204, 204);
-    padding: 4px 8px;
-    text-transform: uppercase;
-    font-size: 0.8rem;
+}
+
+.btn.btn__default:hover {
+    background-color: rgb(165, 165, 165);
 }
 
 .btn.btn__default:disabled {
     color: rgb(182, 182, 182);
     background-color: rgba(204, 204, 204, .7);
+}
+
+/* primary */ 
+
+.btn.btn__primary {
+    background-color: rgb(0, 76, 199);
+    color: #fff;
+}
+
+.btn.btn__primary:hover {
+    background-color: rgb(0, 65, 170);
+}
+
+/* white */ 
+
+.btn.btn__white {
+    background-color: #fff;
+    color: #262626;
+}
+
+.btn.btn__white:hover {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, .15);
 }

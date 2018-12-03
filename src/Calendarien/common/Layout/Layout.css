@@ -1,6 +1,11 @@
+.demnodey {
+    position: relative;
+}
+
 .calendarien {
     font-family: inherit;
     box-sizing: border-box;
+    background: #fff;
 }
 
 .calendarien.outline {
@@ -11,6 +16,48 @@
     border-radius: 5px;
 }
 
+/* mode */
+.calendarien[mode='input'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 260px !important;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s;
+}
+
+.modal__input .calendarien[mode='input'] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.calendarien[mode='input'] .calendarien--viewer {
+    padding: 0 12px;
+    padding-bottom: 12px;
+}
+
+.calendarien[mode='input'] .calendarien--header {
+    padding: 8px 12px 8px 12px;
+}
+
+.calendarien[mode='input'] .calendarien--week {
+    padding-top: 4px;
+    height: 32px;
+}
+
+.calendarien[mode='input'] .calendarien--header__title {
+    font-size: .8rem;
+    letter-spacing: -.3;
+}
+
+.calendarien[mode='input'] .calendarien--dow {
+    padding-top: 8px;
+    padding-bottom: 4px;
+    font-size: .75rem;
+}
 
 /* original theme*/
 

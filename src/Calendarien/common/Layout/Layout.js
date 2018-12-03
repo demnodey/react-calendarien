@@ -1,9 +1,20 @@
 import React from "react";
 import "./Layout.css";
 
-const Layout = ({children, ...rest}) => {
+const Layout = ({children, theme, mode, ...rest}) => {
+
+    let options = {};
+
+    if (theme) {
+        options['theme'] = theme;
+    }
+
+    if (mode) {
+        options['mode'] = mode;
+    }
+
     return (
-        <div {...rest}>
+        <div {...options} {...rest}>
             { children }
         </div>
     )
