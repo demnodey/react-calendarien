@@ -4,7 +4,7 @@ import Button from "../Button";
 
 import { CREATE } from "../../utils/dates";
 
-const Footer = ({visibleMyDate, visibleToday, setDate, mode, onMyDate, onToday, onSubmit, onClear}) => {
+const Footer = ({visibleMyDate, visibleToday, setDate, mode, toggle, onMyDate, onToday, onSubmit, onClear}) => {
     return (
         <div className="calendarien--footer">
             {
@@ -16,7 +16,7 @@ const Footer = ({visibleMyDate, visibleToday, setDate, mode, onMyDate, onToday, 
                             const time = CREATE();
                             return { 
                                 value: time.getTime(),
-                                selectedValue: time.getDate()
+                                selectedValue: time.getDate(), 
                             }
                         }}
                     >Today</Button>

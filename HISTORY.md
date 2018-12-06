@@ -4,6 +4,12 @@
 
 - allowRange 기능 추가하기
 
+## Update #10
+#### 2018 12 05
+- 디자인 부분수정
+- mode 시 'TODAY' 버튼 기능 개선 ( today 클릭시 해당 날짜가 입력된다. )
+---
+
 ## Update #9
 #### 2018 12 03
 - input mode 추가

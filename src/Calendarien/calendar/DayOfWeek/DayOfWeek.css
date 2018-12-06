@@ -5,11 +5,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: .9rem;
+    font-size: 14px;
     font-weight: 400;
 }
 
 .calendarien--dow span {
     text-transform: uppercase;
     letter-spacing: -.3px;
+    display: inline-block;
+    width: calc(100% / 7);
+    text-align: center;
 }

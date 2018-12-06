@@ -12,25 +12,14 @@
 }
 
 .calendarien--header__title {
-    letter-spacing: -.5px;
-    font-size: 1.2rem;
+    letter-spacing: -.3px;
+    font-size: 15px;
 }
 
 .calendarien--header__title::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 1px;
-    background-color: #ccc;
-}
-
-.calendarien--header__title::before {
-    content: "";
-    position: absolute;
-    top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;

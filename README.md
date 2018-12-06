@@ -18,7 +18,8 @@ setDate|string||원하는 날의 달력을 render 시에 보여준다.<br/>하�
 visibleToday|boolean|false|하단 "TODAY" 버튼 가시화
 visibleMyDate|boolean|false|setDate 옵션 추가시 자동적으로 나오는 'MY DATE' 버튼의 가시화를 정한다.
 disabled|boolean|false|이전 날짜는 선택하지 못하도록 막는 기능이다.
-theme|string||달력테마 디자인을 설정합니다.<br> darkblue, forest, gd_darkblue, gd_sunset<br/> * gd가 붙은건 그라데이션을 의미함
+theme|string||달력테마 디자인을 설정합니다.<br/> darkblue, forest, gd_darkblue, gd_sunset<br/> * gd가 붙은건 그라데이션을 의미함
+mode|string||모드를 설정 하여 다양한 형태의 달력을 출력한다. <br/> input > input 에 focus 를 주면 달력이 나온다.
 
 ## Useage
 create-react-app 을 사용했을 때의 경우 아래와 같이 테스트 합니다.<br/>
@@ -71,8 +72,9 @@ class App extends Component {
 > date form 이 맞지 않을시 console.warn 을 출력합니다.
 
 ## Will be Update Function or Value
-- mode
+- mode [ <del><i>input</i></del>, <i>modal</i> ]
 - allowRange
+- View for Reactive Type ( mobile, web, tablet )
 
 ## If you are using an IE browser, you should read this
 !! IE 적용시 react-app-polyfill 을 추가해야합니다.<br/>

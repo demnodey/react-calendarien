@@ -42,7 +42,7 @@ class Calendarien extends Component {
         mode : {
             input : ''
         },
-        modal: {
+        toggle: {
             input: false
         }
     }
@@ -69,14 +69,22 @@ class Calendarien extends Component {
     }
 
     onToday = ({value, selectedValue}) => {
-        this.setState({ value, selectedValue })
+        const { format: fm, mode } = this.props;
+
+        this.setState({ value, selectedValue });
+
+        if ( mode === 'input' ) {
+            const result = !fm ? format('yyyy-mm-dd') : format(fm, value);
+            const { setInputValue } = this;
+            setInputValue(result);
+        }
     }
 
     setPropsValue = (selectValue) => {
         const { getValue, format: fm, mode } = this.props;
         const result = !fm ? selectValue : format(fm, selectValue);
 
-        if ( mode === 'input') {
+        if ( mode === 'input' ) {
             const { setInputValue } = this;
             setInputValue(result);
         }
@@ -89,7 +97,7 @@ class Calendarien extends Component {
     }
 
     handleModal = (bool) => {
-        this.setState((prevState) => ({ modal : { ...prevState.modal, input: bool } }));
+        this.setState((prevState) => ({ toggle : { ...prevState.toggle, input: bool } }));
     }
 
     handleModalClear = () => {
@@ -99,7 +107,7 @@ class Calendarien extends Component {
     }
 
     handleModalSubmit = () => {
-        this.setState({ modal : {input: false}})
+        this.setState({ toggle : {input: false}})
     }
 
     componentDidMount () {
@@ -149,16 +157,16 @@ class Calendarien extends Component {
         const { 
             value,
             selectedValue,
-            modal,
+            toggle,
             mode : _mode
         } = this.state;
 
         const now = disabled ? Date.now() : 0;
         const classnameJoin = joinstr("calendarien", layoutOption);
-        const _modal = modal[mode] ? 'modal__' + mode : ''; 
+        const _toggle = toggle[mode] ? 'toggle__' + mode : ''; 
 
         return (
-            <div className={`demnodey ${_modal}`} >
+            <div className={`demnodey ${_toggle}`} >
                 <Input className={inputClass} mode={mode} value={_mode.input} onFocus={handleModal} readOnly />
                 <Layout className={classnameJoin} theme={theme} mode={mode} style={style}>
 
@@ -185,7 +193,7 @@ class Calendarien extends Component {
                         visibleToday={visibleToday}
                         setDate={setDate}
                         mode={mode}
-                        modal={modal}
+                        toggle={toggle}
                         onMyDate={onMyDate}
                         onToday={onToday}
                         onClear={handleModalClear}
@@ -206,6 +214,7 @@ Calendarien.propTypes = {
     theme: PropTypes.string,
     setDate: PropTypes.string,
     format: PropTypes.string,
+    inputClass: PropTypes.string,
     disabled: PropTypes.bool,
     visibleToday: PropTypes.bool,
     visibleMyDate: PropTypes.bool,
